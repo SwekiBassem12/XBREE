@@ -2,6 +2,7 @@ package com.example.xbree;
 
 import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -209,6 +210,14 @@ private GradientDrawable gradient1, gradient2, gradient3;
                 Intent y  = new Intent(Accueil.this, MessageActivity.class);
                 startActivity(y);
                 break;
+            case R.id.near_by:
+                Intent intent = null, chooser = null;
+                intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse("geo:36.845170,11.080392"));
+                chooser = Intent.createChooser(intent,"Launch Maps");
+                startActivity(chooser);
+                break;
+
         }
         return true;
     }

@@ -66,6 +66,7 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
                 @Override
                 public void onClick(View v) {
                     Intent i = new Intent(v.getContext(),Restau_details.class);
+                    //i.putExtra("image",image.)
                     i.putExtra("title", (title.getText().toString()));
                     i.putExtra("location", (location.getText().toString()));
                     //i.putExtra("image",);

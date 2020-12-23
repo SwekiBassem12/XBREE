@@ -31,6 +31,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.bumptech.glide.Glide;
 import com.example.xbree.Entities.Evenement;
 import com.example.xbree.Retrofit.INodeJS;
 import com.example.xbree.Retrofit.RetrofitClient;
@@ -130,6 +131,17 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         phone = findViewById(R.id.phoneet);
         password = findViewById(R.id.passwordet);
         copassword = findViewById(R.id.copasswordet);
+        imageView = findViewById(R.id.imageView);
+
+        String nname = getIntent().getStringExtra("first_name");
+        String llname = getIntent().getStringExtra("last_name");
+        String eemail = getIntent().getStringExtra("email");
+        String iimage = getIntent().getStringExtra("image");
+
+        email.setText(eemail);
+        name.setText(nname);
+        lname.setText(llname);
+        Glide.with(RegisterActivity.this).load(iimage).into(imageView);
 
         en.setOnClickListener(new View.OnClickListener() {
             @Override

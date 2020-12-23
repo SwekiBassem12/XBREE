@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     SharedPreferences sharedPreferences;
     private ImageButton btRegister;
     private TextView tvLogin;
-    Button Go;
+    Button Go,facebook;
 
     @Override
     protected void onStop() {
@@ -65,6 +65,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         tvLogin = findViewById(R.id.tvLogin);
         btRegister.setOnClickListener(this);
         Go = findViewById(R.id.login_btn);
+        facebook = findViewById(R.id.fb);
         email = findViewById(R.id.emailEdit);
         password = findViewById(R.id.passwordEdit);
 
@@ -74,6 +75,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         sharedPreferences = getSharedPreferences("testt", Context.MODE_PRIVATE);
         email.setText(sharedPreferences.getString("test", ""));
         password.setText(sharedPreferences.getString("test1", ""));
+
+        facebook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(LoginActivity.this, LoginFacebook.class);
+                startActivity(i);
+            }
+        });
 
 
         Go.setOnClickListener(new View.OnClickListener() {

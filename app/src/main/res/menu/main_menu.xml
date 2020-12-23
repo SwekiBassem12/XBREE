@@ -18,6 +18,10 @@
         android:id="@+id/profile"
         android:title="Profile"
         android:icon="@drawable/person"/>
+    <item
+        android:id="@+id/near_by"
+        android:title="Near By !"
+        android:icon="@drawable/location"/>
 </group>
     <!--
     <item android:title="Profile">
