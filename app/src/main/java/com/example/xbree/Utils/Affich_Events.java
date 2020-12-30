@@ -40,12 +40,10 @@ public class Affich_Events extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_affich__events);
-        GetListEvenement();
-
         recyclerView = findViewById(R.id.events);
         favori = findViewById(R.id.favori);
         iNodeJS = RetrofitClient.getInstance().create(INodeJS.class);
-
+        GetListEvenement();
     }
 
     public void GetListEvenement() {

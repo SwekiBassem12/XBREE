@@ -27,6 +27,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -35,6 +36,14 @@ import com.bumptech.glide.Glide;
 import com.example.xbree.Entities.Evenement;
 import com.example.xbree.Retrofit.INodeJS;
 import com.example.xbree.Retrofit.RetrofitClient;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -69,9 +78,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     Button Go;
     public static INodeJS iNodeJS;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
-
+    private GoogleApiClient googleApiClient;
+    private GoogleSignInOptions gso;
     EditText name,lname,email,password,copassword,phone;
-    Button en;
+    Button en,log;
     //upload imgae
     Uri picUri;
     private ArrayList<String> permissionsToRequest;
@@ -132,6 +142,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         password = findViewById(R.id.passwordet);
         copassword = findViewById(R.id.copasswordet);
         imageView = findViewById(R.id.imageView);
+        log = findViewById(R.id.logout);
+
 
         String nname = getIntent().getStringExtra("first_name");
         String llname = getIntent().getStringExtra("last_name");
@@ -157,7 +169,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 else  Toast.makeText(RegisterActivity.this, "Confirm Your Password!",Toast.LENGTH_SHORT).show();}
 
         });
+        log.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
+
 
     private void registerUser(final String email, final String name, final String prenom, final String tel, final String password) {
 
@@ -194,7 +213,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
 
-    @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.fab:
@@ -448,4 +466,5 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

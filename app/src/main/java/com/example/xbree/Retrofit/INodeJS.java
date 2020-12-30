@@ -68,7 +68,8 @@ public interface INodeJS {
 
     @PUT("/user/update{id}")
     @FormUrlEncoded
-    Call<User> updateProfile (@Field("email") String email,
+    Call<User> updateProfile (@Path("id") int id,
+                              @Field("email") String email,
                               @Field("name") String name,
                               @Field("lname") String lname,
                               @Field("phone") int phone);

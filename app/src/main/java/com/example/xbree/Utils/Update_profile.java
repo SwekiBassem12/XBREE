@@ -51,16 +51,17 @@ public class Update_profile extends AppCompatActivity {
     Button update, delete;
     private static int id = 1;
     public static INodeJS iNodeJS;
+    int idd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_profile);
 
-        email1 = findViewById(R.id.emailet);
-        name1 = findViewById(R.id.namet);
-        lname1 = findViewById(R.id.lnameet);
-        phone1 = findViewById(R.id.phoneet);
+        email1 = findViewById(R.id.emailll);
+        name1 = findViewById(R.id.nameee);
+        lname1 = findViewById(R.id.lnameee);
+        phone1 = findViewById(R.id.phoneee);
         password1 = findViewById(R.id.passwordet);
         update = findViewById(R.id.btn_updt);
         delete = findViewById(R.id.btn_delete);
@@ -69,8 +70,8 @@ public class Update_profile extends AppCompatActivity {
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                updateuser(email1.getText().toString(), name1.getText().toString(), lname1.getText().toString(), Integer.valueOf(phone1.getText().toString()));
+                updateuser(idd, email1.getText().toString(), name1.getText().toString(), lname1.getText().toString(), Integer.valueOf(phone1.getText().toString()));
+                System.out.println(idd);
             }
         });
 
@@ -122,26 +123,26 @@ public class Update_profile extends AppCompatActivity {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 Toast.makeText(Update_profile.this, "YYEEESSS", Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(Update_profile.this,LoginActivity.class);
+                Intent i = new Intent(Update_profile.this, LoginActivity.class);
                 startActivity(i);
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
                 Toast.makeText(Update_profile.this, "Deleted Succefully", Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(Update_profile.this,LoginActivity.class);
+                Intent i = new Intent(Update_profile.this, LoginActivity.class);
                 startActivity(i);
             }
         });
     }
 
-    private void updateuser(final String email, final String name, final String prenom, final int tel) {
+    private void updateuser(int id, final String email, final String name, final String prenom, final int tel) {
 
-        Call<User> call = iNodeJS.updateProfile(email, name, prenom, tel);
+        Call<User> call = iNodeJS.updateProfile(id, email, name, prenom, tel);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                Toast.makeText(Update_profile.this, "Updated Successfully", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(Update_profile.this, "Updated Successfully", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(Update_profile.this, Profile.class);
                 startActivity(i);
             }
@@ -173,6 +174,7 @@ public class Update_profile extends AppCompatActivity {
                 editor.putString("pass", user.getPassword());
                 editor.apply();
 
+                idd = sharedPreferences.getInt("idUser", 0);
                 String email = sharedPreferences.getString("EmailUser", "");
                 String name = sharedPreferences.getString("nomUser", "");
                 String lastname = sharedPreferences.getString("prenomUser", "");

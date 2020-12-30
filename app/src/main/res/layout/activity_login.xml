@@ -203,6 +203,7 @@
                 android:text="LOGIN WITH FACEBOOK"
                 android:textColor="@color/colorPurple" />
             <Button
+                android:id="@+id/google"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/fb"
