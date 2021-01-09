@@ -6,11 +6,11 @@ public class HotelsHelperClass {
     String location;
     String descrip;
 
-    public HotelsHelperClass(int image, String title,String location,String descrip) {
+    public HotelsHelperClass(int image, String title, String location, String descrip) {
         this.image = image;
         this.title = title;
         this.location = location;
-    this.descrip = descrip;
+        this.descrip = descrip;
     }
 
     public int getImage() {
@@ -24,6 +24,7 @@ public class HotelsHelperClass {
     public String getLocation() {
         return location;
     }
+
     public String getDescrip() {
         return descrip;
     }

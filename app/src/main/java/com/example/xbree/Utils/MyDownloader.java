@@ -11,8 +11,9 @@ import java.io.InputStream;
 import java.net.URL;
 
 public class MyDownloader extends AsyncTask<String, Void, Bitmap> {
-   private final static String TAG = "AsyncTaskLoadImage";
+    private final static String TAG = "AsyncTaskLoadImage";
     private ImageView imageView;
+
     @Override
     protected void onPostExecute(Bitmap bitmap) {
         imageView.setImageBitmap(bitmap);
@@ -28,7 +29,7 @@ public class MyDownloader extends AsyncTask<String, Void, Bitmap> {
         Bitmap bitmap = null;
         try {
             URL url = new URL(params[0]);
-            bitmap = BitmapFactory.decodeStream((InputStream)url.getContent());
+            bitmap = BitmapFactory.decodeStream((InputStream) url.getContent());
         } catch (IOException e) {
             Log.e(TAG, e.getMessage());
         }

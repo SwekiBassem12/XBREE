@@ -24,7 +24,7 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.Featur
     @NonNull
     @Override
     public FeaturedViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.featured_card_design,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.featured_card_design, parent, false);
         FeaturedViewHolder featuredViewHolder = new FeaturedViewHolder(view);
 
         return featuredViewHolder;
@@ -44,7 +44,7 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.Featur
         return featuredLocations.size();
     }
 
-    public static class FeaturedViewHolder extends RecyclerView.ViewHolder{
+    public static class FeaturedViewHolder extends RecyclerView.ViewHolder {
         ImageView image;
         TextView title;
 

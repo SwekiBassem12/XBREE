@@ -30,7 +30,7 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
     @NonNull
     @Override
     public RestaurantsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.restaurants_card_design,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.restaurants_card_design, parent, false);
         RestaurantsViewHolder RestaurantsViewHolder = new RestaurantsViewHolder(view);
 
         return RestaurantsViewHolder;
@@ -54,7 +54,7 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
     }
 
 
-    public  class RestaurantsViewHolder extends RecyclerView.ViewHolder{
+    public class RestaurantsViewHolder extends RecyclerView.ViewHolder {
         ImageView image;
         TextView title;
         TextView descrip;
@@ -65,7 +65,7 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i = new Intent(v.getContext(),Restau_details.class);
+                    Intent i = new Intent(v.getContext(), Restau_details.class);
                     //i.putExtra("image",image.)
                     i.putExtra("title", (title.getText().toString()));
                     i.putExtra("location", (location.getText().toString()));

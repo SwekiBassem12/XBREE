@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.xbree.AddEvent;
 import com.example.xbree.Entities.Evenement;
 import com.example.xbree.Entities.User;
@@ -48,23 +49,22 @@ public class Update_profile extends AppCompatActivity {
     EditText name1, lname1, email1, password1, phone1;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
     INodeJS myAPI;
-    Button update, delete;
+    Button update;
     private static int id = 1;
     public static INodeJS iNodeJS;
     int idd;
-
+    LottieAnimationView v;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_profile);
-
+        v = findViewById(R.id.animm);
         email1 = findViewById(R.id.emailll);
         name1 = findViewById(R.id.nameee);
         lname1 = findViewById(R.id.lnameee);
         phone1 = findViewById(R.id.phoneee);
         password1 = findViewById(R.id.passwordet);
         update = findViewById(R.id.btn_updt);
-        delete = findViewById(R.id.btn_delete);
         iNodeJS = RetrofitClient.getInstance().create(INodeJS.class);
         loadClientData();
         update.setOnClickListener(new View.OnClickListener() {
@@ -75,7 +75,7 @@ public class Update_profile extends AppCompatActivity {
             }
         });
 
-        delete.setOnClickListener(new View.OnClickListener() {
+        v.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 

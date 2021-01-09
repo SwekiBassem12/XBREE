@@ -24,7 +24,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
     @NonNull
     @Override
     public CategoriesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.categories_card_design,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.categories_card_design, parent, false);
         CategoriesViewHolder CategoriesViewHolder = new CategoriesViewHolder(view);
 
         return CategoriesViewHolder;
@@ -35,8 +35,6 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
         CategoriesHelperClass CategoriesHelperClass = CategoriesLocations.get(position);
         holder.image.setImageResource(CategoriesHelperClass.getImage());
         holder.title.setText(CategoriesHelperClass.getTitle());
-
-
     }
 
     @Override
@@ -44,7 +42,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
         return CategoriesLocations.size();
     }
 
-    public static class CategoriesViewHolder extends RecyclerView.ViewHolder{
+    public static class CategoriesViewHolder extends RecyclerView.ViewHolder {
         ImageView image;
         TextView title;
 

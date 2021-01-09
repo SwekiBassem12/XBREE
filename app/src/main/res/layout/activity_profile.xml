@@ -27,7 +27,7 @@
         android:id="@+id/design_pic"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/profile_design"
+        android:src="@drawable/back_profile"
         android:layout_below="@id/imageview_profile"
         android:layout_marginTop="-3dp"/>
 

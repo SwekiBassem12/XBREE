@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.xbree.R;
+
 import java.util.ArrayList;
 
 public class Most_viewedAdapter extends RecyclerView.Adapter<Most_viewedAdapter.Most_viewedViewHolder> {
@@ -23,7 +24,7 @@ public class Most_viewedAdapter extends RecyclerView.Adapter<Most_viewedAdapter.
     @NonNull
     @Override
     public Most_viewedViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.most_viewed_card_design,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.most_viewed_card_design, parent, false);
         Most_viewedViewHolder Most_viewedViewHolder = new Most_viewedViewHolder(view);
 
         return Most_viewedViewHolder;
@@ -43,7 +44,7 @@ public class Most_viewedAdapter extends RecyclerView.Adapter<Most_viewedAdapter.
         return Most_viewedLocations.size();
     }
 
-    public static class Most_viewedViewHolder extends RecyclerView.ViewHolder{
+    public static class Most_viewedViewHolder extends RecyclerView.ViewHolder {
         ImageView image;
         TextView title;
 

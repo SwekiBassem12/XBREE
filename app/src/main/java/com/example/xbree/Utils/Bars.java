@@ -17,6 +17,7 @@ import java.util.ArrayList;
 public class Bars extends AppCompatActivity {
     RecyclerView BarsRecycler;
     RecyclerView.Adapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,15 +28,15 @@ public class Bars extends AppCompatActivity {
 
     private void BarsRecycler() {
         BarsRecycler.setHasFixedSize(true);
-        BarsRecycler.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+        BarsRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
         ArrayList<BarsHelperClass> RestaurantsLocations = new ArrayList<>();
-        RestaurantsLocations.add(new BarsHelperClass(R.drawable.yuka,"Yuka","Gammarth","This restaurants is specialized in sandwich "));
-        RestaurantsLocations.add(new BarsHelperClass(R.drawable.jobi,"Jobi","Gammarth","This restaurants is specialized in sandwich"));
-        RestaurantsLocations.add(new BarsHelperClass(R.drawable.duplex,"Duplex","Centre Ville","This restaurants is specialized in sandwich"));
-        RestaurantsLocations.add(new BarsHelperClass(R.drawable.sterling,"Le Sterling","Centre Ville","This restaurants is specialized in sandwich and grilled food with hot sauces !!"));
-        RestaurantsLocations.add(new BarsHelperClass(R.drawable.soho,"SOHO","Gammarth","This restaurants is specialized in sandwich and grilled food with hot sauces !!"));
-        RestaurantsLocations.add(new BarsHelperClass(R.drawable.chezlm,"Chez l'Ami","Sokra","This restaurants is specialized in sandwich and grilled food with hot sauces !!"));
+        RestaurantsLocations.add(new BarsHelperClass(R.drawable.yuka, "Yuka", "Gammarth", "This restaurants is specialized in sandwich "));
+        RestaurantsLocations.add(new BarsHelperClass(R.drawable.jobi, "Jobi", "Gammarth", "This restaurants is specialized in sandwich"));
+        RestaurantsLocations.add(new BarsHelperClass(R.drawable.duplex, "Duplex", "Centre Ville", "This restaurants is specialized in sandwich"));
+        RestaurantsLocations.add(new BarsHelperClass(R.drawable.sterling, "Le Sterling", "Centre Ville", "This restaurants is specialized in sandwich and grilled food with hot sauces !!"));
+        RestaurantsLocations.add(new BarsHelperClass(R.drawable.soho, "SOHO", "Gammarth", "This restaurants is specialized in sandwich and grilled food with hot sauces !!"));
+        RestaurantsLocations.add(new BarsHelperClass(R.drawable.chezlm, "Chez l'Ami", "Sokra", "This restaurants is specialized in sandwich and grilled food with hot sauces !!"));
         adapter = new BarsAdapter(RestaurantsLocations);
         BarsRecycler.setAdapter(adapter);
     }

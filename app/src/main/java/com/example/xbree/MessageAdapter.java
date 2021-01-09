@@ -28,7 +28,7 @@ public class MessageAdapter extends RecyclerView.Adapter {
     private LayoutInflater inflater;
     private List<JSONObject> messages = new ArrayList<>();
 
-    public MessageAdapter (LayoutInflater inflater) {
+    public MessageAdapter(LayoutInflater inflater) {
         this.inflater = inflater;
     }
 
@@ -196,7 +196,7 @@ public class MessageAdapter extends RecyclerView.Adapter {
         return messages.size();
     }
 
-    public void addItem (JSONObject jsonObject) {
+    public void addItem(JSONObject jsonObject) {
         messages.add(jsonObject);
         notifyDataSetChanged();
     }

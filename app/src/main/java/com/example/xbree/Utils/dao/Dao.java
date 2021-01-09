@@ -6,6 +6,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 
 import com.example.xbree.Entities.Evenement;
+import com.example.xbree.Entities.UserCommentaire;
 
 import java.util.List;
 
@@ -20,5 +21,6 @@ public interface Dao {
     void delete(Evenement produit);
     @Query("SELECT * FROM evenement")
     List<Evenement> getAll();
+
 
 }

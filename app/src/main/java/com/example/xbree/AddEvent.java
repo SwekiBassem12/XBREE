@@ -72,11 +72,11 @@ import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 public class AddEvent extends AppCompatActivity implements View.OnClickListener {
     INodeJS myAPI;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
-    EditText nom,type,distance,lieu,prix,contact,datedebut,datefin,camp_desc,nbPlace;
+    EditText nom, type, distance, lieu, prix, contact, datedebut, datefin, camp_desc, nbPlace;
     Button add;
     SharedPreferences sharedPreferences;
     private final static int id_user = 12;
-    DatePickerDialog.OnDateSetListener dateSetListener1,dateSetListener2;
+    DatePickerDialog.OnDateSetListener dateSetListener1, dateSetListener2;
     public static INodeJS iNodeJS;
     //upload imgae
     Uri picUri;
@@ -151,11 +151,11 @@ public class AddEvent extends AppCompatActivity implements View.OnClickListener 
                         intent.putExtra(CalendarContract.Events.TITLE, nom.getText().toString());
                         intent.putExtra(CalendarContract.Events.EVENT_LOCATION, lieu.getText().toString());
                         intent.putExtra(CalendarContract.Events.DESCRIPTION, camp_desc.getText().toString());
-                        intent.putExtra(CalendarContract.Events.ALL_DAY,true);
-                        intent.putExtra(Intent.EXTRA_EMAIL,"bassem.sweki@esprit.tn");
-                        if(intent.resolveActivity(getPackageManager()) !=null){
+                        intent.putExtra(CalendarContract.Events.ALL_DAY, true);
+                        intent.putExtra(Intent.EXTRA_EMAIL, "bassem.sweki@esprit.tn");
+                        if (intent.resolveActivity(getPackageManager()) != null) {
                             startActivity(intent);
-                        }else{
+                        } else {
                             System.out.println("LLEEEEEE");
                         }
 
@@ -166,7 +166,7 @@ public class AddEvent extends AppCompatActivity implements View.OnClickListener 
                     public void onClick(View v) {
                         addEvenement(nom.getText().toString(), type.getText().toString(), datedebut.getText().toString(), datefin.getText().toString(), Integer.parseInt(distance.getText().toString()),
                                 lieu.getText().toString(), Integer.parseInt(contact.getText().toString()), Integer.parseInt(prix.getText().toString()), camp_desc.getText().toString(), Integer.parseInt(nbPlace.getText().toString()), idus);
-                        Intent r = new Intent(AddEvent.this,Accueil.class);
+                        Intent r = new Intent(AddEvent.this, Accueil.class);
                         startActivity(r);
                     }
                 });
@@ -174,16 +174,16 @@ public class AddEvent extends AppCompatActivity implements View.OnClickListener 
                 //startActivity(i);
             }
         });
-        Calendar calendar=Calendar.getInstance();
-        final int year=calendar.get(Calendar.YEAR);
-        final int month=calendar.get(Calendar.MONTH);
-        final int day=calendar.get(Calendar.DAY_OF_MONTH);
+        Calendar calendar = Calendar.getInstance();
+        final int year = calendar.get(Calendar.YEAR);
+        final int month = calendar.get(Calendar.MONTH);
+        final int day = calendar.get(Calendar.DAY_OF_MONTH);
 
         datedebut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatePickerDialog datePickerDialog=new DatePickerDialog(AddEvent.this,
-                        dateSetListener1,year,month,day);
+                DatePickerDialog datePickerDialog = new DatePickerDialog(AddEvent.this,
+                        dateSetListener1, year, month, day);
                 datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
                 datePickerDialog.getWindow();
                 datePickerDialog.show();
@@ -192,8 +192,8 @@ public class AddEvent extends AppCompatActivity implements View.OnClickListener 
         dateSetListener1 = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int day) {
-                month +=1;
-                String d=day + "/" + month + "/" + year;
+                month += 1;
+                String d = day + "/" + month + "/" + year;
                 datedebut.setText(d);
             }
         };
@@ -201,41 +201,41 @@ public class AddEvent extends AppCompatActivity implements View.OnClickListener 
         datefin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatePickerDialog datePickerDialog=new DatePickerDialog(AddEvent.this,
+                DatePickerDialog datePickerDialog = new DatePickerDialog(AddEvent.this,
                         dateSetListener2
-                        ,year,month,day);
+                        , year, month, day);
                 Calendar mindate = Calendar.getInstance();
-                mindate.set(year,month,day);
+                mindate.set(year, month, day);
                 datePickerDialog.getDatePicker().setMinDate(mindate.getTimeInMillis() - 1000);
                 datePickerDialog.getWindow();
                 datePickerDialog.show();
 
             }
         });
-        dateSetListener2 =new DatePickerDialog.OnDateSetListener() {
+        dateSetListener2 = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int day) {
-                month +=1;
-                String date=day + "/" + month + "/" + year;
+                month += 1;
+                String date = day + "/" + month + "/" + year;
                 datefin.setText(date);
             }
         };
 
-}
+    }
 
-    private void addEvenement(final String nom_evenement, final String type_evenement, final String date_debut_evenement,  final String date_fin_evenement, final int camp_distanse,
+    private void addEvenement(final String nom_evenement, final String type_evenement, final String date_debut_evenement, final String date_fin_evenement, final int camp_distanse,
                               final String camp_lieu, final int camp_contact, final int camp_prix, final String description_evenement, final int nbplace_evenement
-            ,int id_user) {
+            , int id_user) {
 
         System.out.println(id_user);
 
-        compositeDisposable.add(iNodeJS.addEvenement(nom_evenement,type_evenement,date_debut_evenement,date_fin_evenement,camp_distanse,camp_lieu,camp_contact,description_evenement,nbplace_evenement,camp_prix,id_user)
+        compositeDisposable.add(iNodeJS.addEvenement(nom_evenement, type_evenement, date_debut_evenement, date_fin_evenement, camp_distanse, camp_lieu, camp_contact, description_evenement, nbplace_evenement, camp_prix, id_user)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<String>() {
                     @Override
                     public void accept(String s) throws Exception {
-                        Toast.makeText(AddEvent.this,"evenement ajouté",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddEvent.this, "evenement ajouté", Toast.LENGTH_SHORT).show();
                         System.out.println("evenement ajouté");
                     }
                 })
@@ -337,7 +337,7 @@ public class AddEvent extends AppCompatActivity implements View.OnClickListener 
                 if (filePath != null) {
                     mBitmap = BitmapFactory.decodeFile(filePath);
                     imageView.setImageBitmap(mBitmap);
-                    Log.d("image",filePath );
+                    Log.d("image", filePath);
                 }
             }
 
@@ -352,7 +352,7 @@ public class AddEvent extends AppCompatActivity implements View.OnClickListener 
         if (isCamera) return getCaptureImageOutputUri().getPath();
 
         else
-            Log.d("haythem",getPathFromURI(data.getData()) );
+            Log.d("haythem", getPathFromURI(data.getData()));
         return getPathFromURI(data.getData());
 
     }
@@ -401,7 +401,7 @@ public class AddEvent extends AppCompatActivity implements View.OnClickListener 
     private boolean hasPermission(String permission) {
         if (canMakeSmores()) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                return (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)== PackageManager.PERMISSION_GRANTED);
+                return (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED);
             }
         }
         return true;
@@ -471,7 +471,7 @@ public class AddEvent extends AppCompatActivity implements View.OnClickListener 
             RequestBody reqFile = RequestBody.create(MediaType.parse("image/*"), file);
             MultipartBody.Part image = MultipartBody.Part.createFormData("upload", file.getName(), reqFile);
             RequestBody name = RequestBody.create(MediaType.parse("text/plain"), "upload");
-            Call<ResponseBody> req= iNodeJS.postImage(image, name);
+            Call<ResponseBody> req = iNodeJS.postImage(image, name);
             req.enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

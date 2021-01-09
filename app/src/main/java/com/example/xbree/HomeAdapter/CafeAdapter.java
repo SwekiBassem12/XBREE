@@ -24,7 +24,7 @@ public class CafeAdapter extends RecyclerView.Adapter<CafeAdapter.CafeViewHolder
     @NonNull
     @Override
     public CafeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cafe_card_design,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cafe_card_design, parent, false);
         CafeViewHolder CafeViewHolder = new CafeViewHolder(view);
 
         return CafeViewHolder;
@@ -46,7 +46,7 @@ public class CafeAdapter extends RecyclerView.Adapter<CafeAdapter.CafeViewHolder
         return CafeLocations.size();
     }
 
-    public static class CafeViewHolder extends RecyclerView.ViewHolder{
+    public static class CafeViewHolder extends RecyclerView.ViewHolder {
         ImageView image;
         TextView title;
         TextView descrip;

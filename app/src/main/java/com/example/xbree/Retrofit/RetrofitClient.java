@@ -11,13 +11,13 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 public class RetrofitClient {
     private static Retrofit instance;
 
-    public static Retrofit getInstance(){
-        if(instance == null) {
+    public static Retrofit getInstance() {
+        if (instance == null) {
             Gson gson = new GsonBuilder()
                     .setLenient()
                     .create();
             instance = new Retrofit.Builder()
-                    .baseUrl("http://192.168.43.203:3000/") //In Emulator, 127.0.0.1 will changed to 10.0.2.2
+                    .baseUrl("http://192.168.1.20:3000/") //In Emulator, 127.0.0.1 will changed to 10.0.2.2
                     .addConverterFactory(ScalarsConverterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

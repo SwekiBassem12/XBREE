@@ -43,7 +43,6 @@
         <activity android:name=".Utils.Restaurants" />
         <activity android:name=".Utils.Update_profile" />
         <activity android:name=".Utils.Affich_Events" />
-        <activity android:name=".Accueil2" />
         <activity android:name=".AddEvent" />
         <activity android:name=".Profile" />
         <activity android:name=".Accueil" />

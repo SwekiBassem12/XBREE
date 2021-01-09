@@ -24,7 +24,7 @@ public class BarsAdapter extends RecyclerView.Adapter<BarsAdapter.BarsViewHolder
     @NonNull
     @Override
     public BarsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.bars_card_design,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.bars_card_design, parent, false);
         BarsViewHolder BarsViewHolder = new BarsViewHolder(view);
 
         return BarsViewHolder;
@@ -46,7 +46,7 @@ public class BarsAdapter extends RecyclerView.Adapter<BarsAdapter.BarsViewHolder
         return BarsLocations.size();
     }
 
-    public static class BarsViewHolder extends RecyclerView.ViewHolder{
+    public static class BarsViewHolder extends RecyclerView.ViewHolder {
         ImageView image;
         TextView title;
         TextView descrip;

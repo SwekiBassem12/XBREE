@@ -2,6 +2,7 @@ package com.example.xbree.Retrofit;
 
 import com.example.xbree.Entities.Evenement;
 import com.example.xbree.Entities.User;
+import com.example.xbree.Entities.UserCommentaire;
 
 import java.util.List;
 
@@ -28,6 +29,12 @@ public interface INodeJS {
                                     @Field("lname") String lname,
                                     @Field("phone") String phone,
                                     @Field("password") String password);
+
+    @POST("commenter")
+    @FormUrlEncoded
+    Observable<String> commenterUser (@Field("commentaire") String commentaire,
+                                     @Field("id_user") int id_user,
+                                     @Field("nom_user") String nom_user);
 
     @POST("login")
     @FormUrlEncoded
@@ -65,6 +72,9 @@ public interface INodeJS {
 
     @GET("/GetEvents/")
     Call<List<Evenement>> getEventsList();
+
+    @GET("/GetComs/")
+    Call<List<UserCommentaire>> getComsList();
 
     @PUT("/user/update{id}")
     @FormUrlEncoded

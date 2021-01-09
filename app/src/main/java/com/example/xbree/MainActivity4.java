@@ -51,14 +51,14 @@ public class MainActivity4 extends AppCompatActivity {
         task.addOnSuccessListener(new OnSuccessListener<Location>() {
             @Override
             public void onSuccess(final Location location) {
-                if(location != null){
+                if (location != null) {
                     supportMapFragment.getMapAsync(new OnMapReadyCallback() {
                         @Override
                         public void onMapReady(GoogleMap googleMap) {
-                            LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
+                            LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
                             MarkerOptions options = new MarkerOptions().position(latLng)
                                     .title("I am here");
-                            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,10));
+                            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
                             googleMap.addMarker(options);
                         }
                     });
@@ -69,8 +69,8 @@ public class MainActivity4 extends AppCompatActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if(requestCode == 44){
-            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+        if (requestCode == 44) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 getCurrentLocation();
             }
         }

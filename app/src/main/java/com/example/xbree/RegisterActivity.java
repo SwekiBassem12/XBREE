@@ -36,12 +36,17 @@ import com.bumptech.glide.Glide;
 import com.example.xbree.Entities.Evenement;
 import com.example.xbree.Retrofit.INodeJS;
 import com.example.xbree.Retrofit.RetrofitClient;
+import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.OptionalPendingResult;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
@@ -74,14 +79,14 @@ import static android.Manifest.permission.CAMERA;
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
-public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
+public class RegisterActivity extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
     Button Go;
     public static INodeJS iNodeJS;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
     private GoogleApiClient googleApiClient;
     private GoogleSignInOptions gso;
-    EditText name,lname,email,password,copassword,phone;
-    Button en,log;
+    EditText name, lname, email, password, copassword, phone;
+    Button en, log;
     //upload imgae
     Uri picUri;
     private ArrayList<String> permissionsToRequest;
@@ -110,18 +115,27 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        gso =  new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        googleApiClient=new GoogleApiClient.Builder(this)
+                .enableAutoManage(this,this)
+                .addApi(Auth.GOOGLE_SIGN_IN_API,gso)
+                .build();
+
         Toolbar toolbar = findViewById(R.id.bgHeader);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         rlayout = findViewById(R.id.rlayout);
-        animation = AnimationUtils.loadAnimation(this,R.anim.uptodowndiagonal);
+        animation = AnimationUtils.loadAnimation(this, R.anim.uptodowndiagonal);
         rlayout.setAnimation(animation);
         en = findViewById(R.id.btn_register);
 
@@ -144,7 +158,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         imageView = findViewById(R.id.imageView);
         log = findViewById(R.id.logout);
 
-
         String nname = getIntent().getStringExtra("first_name");
         String llname = getIntent().getStringExtra("last_name");
         String eemail = getIntent().getStringExtra("email");
@@ -153,47 +166,93 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         email.setText(eemail);
         name.setText(nname);
         lname.setText(llname);
-        Glide.with(RegisterActivity.this).load(iimage).into(imageView);
 
         en.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String cp = copassword.getText().toString();
                 String p = password.getText().toString();
-                if (cp.equals(p)){
+                if (cp.equals(p)) {
 
-                    registerUser(email.getText().toString(),name.getText().toString(),lname.getText().toString(),phone.getText().toString(),p);
+                    registerUser(email.getText().toString(), name.getText().toString(), lname.getText().toString(), phone.getText().toString(), p);
                     Intent i = new Intent(RegisterActivity.this, Accueil.class);
                     startActivity(i);
-                }
-                else  Toast.makeText(RegisterActivity.this, "Confirm Your Password!",Toast.LENGTH_SHORT).show();}
+                } else
+                    Toast.makeText(RegisterActivity.this, "Confirm Your Password!", Toast.LENGTH_SHORT).show();
+            }
 
         });
         log.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(
+                        new ResultCallback<Status>() {
+                            @Override
+                            public void onResult(Status status) {
+                                if (status.isSuccess()){
+                                    gotoMainActivity();
+                                }else{
+                                    Toast.makeText(getApplicationContext(),"Session not close", Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        });
             }
         });
     }
+    private void gotoMainActivity(){
+        Intent intent=new Intent(this,LoginActivity.class);
+        startActivity(intent);
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        OptionalPendingResult<GoogleSignInResult> opr= Auth.GoogleSignInApi.silentSignIn(googleApiClient);
+        if(opr.isDone()){
+            GoogleSignInResult result=opr.get();
+            handleSignInResult(result);
+        }else{
+            opr.setResultCallback(new ResultCallback<GoogleSignInResult>() {
+                @Override
+                public void onResult(@NonNull GoogleSignInResult googleSignInResult) {
+                    handleSignInResult(googleSignInResult);
+                }
+            });
+        }
+    }
+
+    private void handleSignInResult(GoogleSignInResult result){
+        if(result.isSuccess()){
+            GoogleSignInAccount account=result.getSignInAccount();
+            name.setText(account.getFamilyName());
+            lname.setText(account.getGivenName());
+            email.setText(account.getEmail());
+            try{
+                Glide.with(this).load(account.getPhotoUrl()).into(imageView);
+            }catch (NullPointerException e){
+                Toast.makeText(getApplicationContext(),"image not found",Toast.LENGTH_LONG).show();
+            }
+
+        }else{
+            gotoMainActivity();
+        }
+    }
 
     private void registerUser(final String email, final String name, final String prenom, final String tel, final String password) {
 
 
-        compositeDisposable.add(iNodeJS.registerUser(email,name,prenom,tel,password)
+        compositeDisposable.add(iNodeJS.registerUser(email, name, prenom, tel, password)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<String>() {
                     @Override
                     public void accept(String s) throws Exception {
-                        Toast.makeText(RegisterActivity.this,""+s,Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this, "" + s, Toast.LENGTH_SHORT).show();
                     }
                 })
         );
 
     }
-
 
 
     //upload image
@@ -260,7 +319,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             allIntents.add(intent);
 
         }
-        Intent i = allIntents.get(allIntents.size()-1);
+        Intent i = allIntents.get(allIntents.size() - 1);
         for (Intent intent : allIntents) {
             if (intent.getComponent().getClassName().equals("com.android.documentsui.DocumentsActivity")) {
                 i = intent;
@@ -274,6 +333,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         return chooserIntent;
     }
+
     private Uri getCaptureImageOutputUri() {
         Uri outputFileUri = null;
         File getImage = getExternalFilesDir("");
@@ -425,24 +485,24 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             RequestBody reqFile = RequestBody.create(MediaType.parse("image/*"), file);
             MultipartBody.Part image = MultipartBody.Part.createFormData("upload", file.getName(), reqFile);
             RequestBody name = RequestBody.create(MediaType.parse("text/plain"), "upload");
-            Call<ResponseBody> req= iNodeJS.postImage(image, name);
+            Call<ResponseBody> req = iNodeJS.postImage(image, name);
             req.enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
                     if (response.code() == 200) {
-                      //  textView.setText("Uploaded Successfully!");
+                        //  textView.setText("Uploaded Successfully!");
                         Toast.makeText(getApplicationContext(), response.code() + " Request OK!", Toast.LENGTH_SHORT).show();
-                    //    textView.setTextColor(Color.BLUE);
+                        //    textView.setTextColor(Color.BLUE);
                     }
 
-                   // Toast.makeText(getApplicationContext(), response.code() + " Request OK!", Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(getApplicationContext(), response.code() + " Request OK!", Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
                 public void onFailure(Call<ResponseBody> call, Throwable t) {
                     //textView.setText("Uploaded Failed!");
-                   // textView.setTextColor(Color.RED);
+                    // textView.setTextColor(Color.RED);
                     Toast.makeText(getApplicationContext(), "Request Failed!", Toast.LENGTH_SHORT).show();
                     t.printStackTrace();
                 }
@@ -459,12 +519,16 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case android.R.id.home :
+        switch (item.getItemId()) {
+            case android.R.id.home:
                 onBackPressed();
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
 }

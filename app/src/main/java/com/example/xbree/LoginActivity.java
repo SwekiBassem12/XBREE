@@ -15,21 +15,18 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.xbree.Entities.Evenement;
 import com.example.xbree.Entities.User;
 import com.example.xbree.Retrofit.INodeJS;
 import com.example.xbree.Retrofit.RetrofitClient;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.Task;
-
-import java.util.List;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -38,20 +35,18 @@ import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 @SuppressWarnings("unchecked")
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
     public static INodeJS iNodeJS;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
-    GoogleSignInClient mGoogleSignInClient;
-    int RC_SIGN_IN = 0;
     EditText email, password;
     SharedPreferences sharedPreferences;
     private ImageButton btRegister;
     private TextView tvLogin;
     Button Go, facebook, ggl;
+    private GoogleApiClient googleApiClient;
+    private static final int RC_SIGN_IN = 1;
 
     @Override
     protected void onStop() {
@@ -65,17 +60,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onDestroy();
     }
 
-    /*
-        @Override
-        protected void onStart() {
-            super.onStart();
-            GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        }
-    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        GoogleSignInOptions gso =  new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        googleApiClient=new GoogleApiClient.Builder(this)
+                .enableAutoManage(this,this)
+                .addApi(Auth.GOOGLE_SIGN_IN_API,gso)
+                .build();
+
         btRegister = findViewById(R.id.btRegister);
         tvLogin = findViewById(R.id.tvLogin);
         btRegister.setOnClickListener(this);
@@ -103,18 +99,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         ggl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switch (v.getId()) {
-                    case R.id.google:
-                        signIn();
-                        break;
-                }
+                Intent intent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
+                startActivityForResult(intent,RC_SIGN_IN);
             }
         });
-
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
-        mGoogleSignInClient = GoogleSignIn.getClient(LoginActivity.this, gso);
 
         Go.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,11 +112,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 if (e.equals("")) {
                     email.setError("email is empty");
                 }
-                if(p.equals("")) {
+                if (p.equals("")) {
                     password.setError("password is empty");
                     //Toast.makeText(LoginActivity.this, "Check Your Entries!", Toast.LENGTH_SHORT).show();
-                }
-                 else {
+                } else {
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("test", e);
                     editor.putString("test1", p);
@@ -139,38 +126,28 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         });
     }
 
-    private void signIn() {
-        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, RC_SIGN_IN);
-    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
+        if(requestCode==RC_SIGN_IN){
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            handleSignInResult(result);
+        }
         // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
-        if (requestCode == RC_SIGN_IN) {
-            // The Task returned from this call is always completed, no need to attach
-            // a listener.
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            handleSignInResult(task);
+
+    }
+    private void handleSignInResult(GoogleSignInResult result){
+        if(result.isSuccess()){
+            gotoProfile();
+        }else{
+            Toast.makeText(getApplicationContext(),"Sign in cancel",Toast.LENGTH_LONG).show();
         }
     }
-
-    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
-        try {
-            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-
-            // Signed in successfully, show authenticated UI.
-            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-            startActivity(intent);
-        } catch (ApiException e) {
-            // The ApiException status code indicates the detailed failure reason.
-            // Please refer to the GoogleSignInStatusCodes class reference for more information.
-            Log.w("Errorr", "signInResult:failed code=" + e.getStatusCode());
-        }
+    private void gotoProfile(){
+        Intent intent=new Intent(LoginActivity.this,RegisterActivity.class);
+        startActivity(intent);
     }
-
     private void loginUser(final String email, String password) {
         compositeDisposable.add(iNodeJS.loginUser(email, password)
                 .subscribeOn(Schedulers.io())
@@ -230,6 +207,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             startActivity(intent, activityOptions.toBundle());
 
         }
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
 }

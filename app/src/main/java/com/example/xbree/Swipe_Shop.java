@@ -57,11 +57,7 @@ public class Swipe_Shop extends AppCompatActivity implements com.example.xbree.R
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                moviesList.add("Black Widow (2020)");
-                moviesList.add("The Eternals (2020)");
-                moviesList.add("Shang-Chi and the Legend of the Ten Rings (2021)");
-                moviesList.add("Doctor Strange in the Multiverse of Madness (2021)");
-                moviesList.add("Thor: Love and Thunder (2021)");
+                moviesList.add("Ticket: Gallery sweki");
 
                 recyclerAdapter.notifyDataSetChanged();
                 swipeRefreshLayout.setRefreshing(false);
@@ -139,8 +135,7 @@ public class Swipe_Shop extends AppCompatActivity implements com.example.xbree.R
     };
 
 
-
-//    These are the interface Methods from our custom RecyclerViewClickInterface
+    //    These are the interface Methods from our custom RecyclerViewClickInterface
     @Override
     public void onItemClick(int position) {
         Intent intent = new Intent(this, com.example.xbree.NewActivity.class);

@@ -32,17 +32,17 @@ public class Restaurants extends AppCompatActivity {
 
     private void RestaurantsRecycler() {
         RestaurantsRecycler.setHasFixedSize(true);
-        RestaurantsRecycler.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+        RestaurantsRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
         ArrayList<RestaurantsHelperClass> RestaurantsLocations = new ArrayList<>();
-        RestaurantsLocations.add(new RestaurantsHelperClass(R.drawable.plan_b,"Plan B","Manzah 1","This restaurants is specialized in sandwich "));
-        RestaurantsLocations.add(new RestaurantsHelperClass(R.drawable.kfc,"KFC","Manar 2","This restaurants is specialized in sandwich"));
-        RestaurantsLocations.add(new RestaurantsHelperClass(R.drawable.tacos,"Chaneb Tacos","Ennasr 1","This restaurants is specialized in sandwich"));
-        RestaurantsLocations.add(new RestaurantsHelperClass(R.drawable.baguette,"Baguette&Baguette","Centre Ville","This restaurants is specialized in sandwich and grilled food with hot sauces !!"));
-        RestaurantsLocations.add(new RestaurantsHelperClass(R.drawable.senio_tacos,"Senior Tacos","Ennasr 2","This restaurants is specialized in sandwich and grilled food with hot sauces !!"));
-        RestaurantsLocations.add(new RestaurantsHelperClass(R.drawable.carmine,"Carmine","Gammarth","This restaurants is specialized in sandwich and grilled food with hot sauces !!"));
-        RestaurantsLocations.add(new RestaurantsHelperClass(R.drawable.pasta_causi,"Pasta Cosi","Lac 1","This restaurants is specialized in sandwich and grilled food with hot sauces !!"));
-        RestaurantsLocations.add(new RestaurantsHelperClass(R.drawable.dar_zmen,"Dar Zmen","Lac 2","This restaurants is specialized in sandwich and grilled food with hot sauces !!"));
+        RestaurantsLocations.add(new RestaurantsHelperClass(R.drawable.plan_b, "Plan B", "Manzah 1", "This restaurants is specialized in sandwich "));
+        RestaurantsLocations.add(new RestaurantsHelperClass(R.drawable.kfc, "KFC", "Manar 2", "This restaurants is specialized in sandwich"));
+        RestaurantsLocations.add(new RestaurantsHelperClass(R.drawable.tacos, "Chaneb Tacos", "Ennasr 1", "This restaurants is specialized in sandwich"));
+        RestaurantsLocations.add(new RestaurantsHelperClass(R.drawable.baguette, "Baguette&Baguette", "Centre Ville", "This restaurants is specialized in sandwich and grilled food with hot sauces !!"));
+        RestaurantsLocations.add(new RestaurantsHelperClass(R.drawable.senio_tacos, "Senior Tacos", "Ennasr 2", "This restaurants is specialized in sandwich and grilled food with hot sauces !!"));
+        RestaurantsLocations.add(new RestaurantsHelperClass(R.drawable.carmine, "Carmine", "Gammarth", "This restaurants is specialized in sandwich and grilled food with hot sauces !!"));
+        RestaurantsLocations.add(new RestaurantsHelperClass(R.drawable.pasta_causi, "Pasta Cosi", "Lac 1", "This restaurants is specialized in sandwich and grilled food with hot sauces !!"));
+        RestaurantsLocations.add(new RestaurantsHelperClass(R.drawable.dar_zmen, "Dar Zmen", "Lac 2", "This restaurants is specialized in sandwich and grilled food with hot sauces !!"));
         adapter = new RestaurantsAdapter(RestaurantsLocations);
         RestaurantsRecycler.setAdapter(adapter);
 

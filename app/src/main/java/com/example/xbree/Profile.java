@@ -53,7 +53,7 @@ public class Profile extends AppCompatActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(com.example.xbree.Profile.this,LoginActivity.class);
+                Intent i = new Intent(com.example.xbree.Profile.this, LoginActivity.class);
                 startActivity(i);
 
             }

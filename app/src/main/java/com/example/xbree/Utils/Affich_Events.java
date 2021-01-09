@@ -29,8 +29,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Affich_Events extends AppCompatActivity {
 
-    ImageView acceuil1,profileuser,favori;
-    List<Evenement> evenementsList ;
+    ImageView acceuil1, profileuser, favori;
+    List<Evenement> evenementsList;
 
     RecyclerView recyclerView;
     public static INodeJS iNodeJS;
@@ -47,13 +47,13 @@ public class Affich_Events extends AppCompatActivity {
     }
 
     public void GetListEvenement() {
-        Call<List<Evenement>> call= iNodeJS.getEventsList();
-        Log.e("hs,","bvn,s;c");
+        Call<List<Evenement>> call = iNodeJS.getEventsList();
+        Log.e("hs,", "bvn,s;c");
         call.enqueue(new Callback<List<Evenement>>() {
             @Override
             public void onResponse(Call<List<Evenement>> call, Response<List<Evenement>> response) {
                 evenementsList = response.body();
-                Log.e("hs,","bvn,s;c");
+                Log.e("hs,", "bvn,s;c");
                 Log.d("test2", String.valueOf(response.body()));
                 //recyclerView = (R.id.publications);
                 EvenementAdapter adapter = new EvenementAdapter(mContext, evenementsList);

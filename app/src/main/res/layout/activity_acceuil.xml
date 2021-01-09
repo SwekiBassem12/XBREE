@@ -6,6 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Accueil"
     android:id="@+id/drawer_layout">
+    
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigation_view"
@@ -34,7 +35,9 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             app:srcCompat="@drawable/menu"
-            android:layout_centerVertical="true"/>
+            android:layout_centerVertical="true"
+            tools:ignore="VectorDrawableCompat" />
+
         <ImageView
             android:id="@+id/shop"
             android:layout_width="40dp"
@@ -43,7 +46,8 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:padding="5dp"
-            android:background="@color/banner_background"/>
+            android:background="@color/banner_background"
+            tools:ignore="VectorDrawableCompat" />
 
 
 

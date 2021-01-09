@@ -24,7 +24,7 @@ public class HotelsAdapter extends RecyclerView.Adapter<HotelsAdapter.HotelsView
     @NonNull
     @Override
     public HotelsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.hotels_card_design,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.hotels_card_design, parent, false);
         HotelsViewHolder HotelsViewHolder = new HotelsViewHolder(view);
 
         return HotelsViewHolder;
@@ -46,7 +46,7 @@ public class HotelsAdapter extends RecyclerView.Adapter<HotelsAdapter.HotelsView
         return HotelsLocations.size();
     }
 
-    public static class HotelsViewHolder extends RecyclerView.ViewHolder{
+    public static class HotelsViewHolder extends RecyclerView.ViewHolder {
         ImageView image;
         TextView title;
         TextView descrip;

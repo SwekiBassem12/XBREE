@@ -33,14 +33,13 @@ public class MainActivity extends AppCompatActivity {
         imageView.setAnimation(top);
         textView1.setAnimation(bottom);
         textView2.setAnimation(bottom);
-        new Handler().postDelayed(new Runnable()
-        {
+        new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
             }
-        },XBREE_APP);
+        }, XBREE_APP);
     }
 }

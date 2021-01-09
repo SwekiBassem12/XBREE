@@ -32,19 +32,20 @@ import com.example.xbree.HomeAdapter.FeaturedHelperClass;
 
 import java.util.ArrayList;
 
-public class Accueil extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
-    static final float END_SCALE= 0.7f;
+public class Accueil extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    static final float END_SCALE = 0.7f;
     LinearLayout contentView;
-RecyclerView FeaturedRecycler;
-RecyclerView CategoriesRecycler;
-RecyclerView Most_viewedRecycler;
-RecyclerView.Adapter adapter;
-ImageView icon_drawer;
-ImageView shop;
-ImageView restau,hotel,bar,cafe;
-private GradientDrawable gradient1, gradient2, gradient3;
+    RecyclerView FeaturedRecycler;
+    RecyclerView CategoriesRecycler;
+    RecyclerView Most_viewedRecycler;
+    RecyclerView.Adapter adapter;
+    ImageView icon_drawer;
+    ImageView shop;
+    ImageView restau, hotel, bar, cafe;
+    private GradientDrawable gradient1, gradient2, gradient3;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,35 +70,35 @@ private GradientDrawable gradient1, gradient2, gradient3;
         shop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i  = new Intent(Accueil.this,Swipe_Shop.class);
+                Intent i = new Intent(Accueil.this, Swipe_Shop.class);
                 startActivity(i);
             }
         });
         restau.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i  = new Intent(Accueil.this, Restaurants.class);
+                Intent i = new Intent(Accueil.this, Restaurants.class);
                 startActivity(i);
             }
         });
         cafe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i  = new Intent(Accueil.this, Cafee.class);
+                Intent i = new Intent(Accueil.this, Cafee.class);
                 startActivity(i);
             }
         });
         bar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i  = new Intent(Accueil.this, Bars.class);
+                Intent i = new Intent(Accueil.this, Bars.class);
                 startActivity(i);
             }
         });
         hotel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i  = new Intent(Accueil.this, Hotels.class);
+                Intent i = new Intent(Accueil.this, Hotels.class);
                 startActivity(i);
             }
         });
@@ -105,12 +106,12 @@ private GradientDrawable gradient1, gradient2, gradient3;
 
     private void Most_viewedRecycler() {
         Most_viewedRecycler.setHasFixedSize(true);
-        Most_viewedRecycler.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+        Most_viewedRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
         ArrayList<Most_viewedHelperClass> featuredLocations = new ArrayList<>();
-        featuredLocations.add(new Most_viewedHelperClass(R.drawable.plan_b,"Plan B"));
-        featuredLocations.add(new Most_viewedHelperClass(R.drawable.kfc,"KFC"));
-        featuredLocations.add(new Most_viewedHelperClass(R.drawable.tacos,"Chaneb Tacos"));
+        featuredLocations.add(new Most_viewedHelperClass(R.drawable.plan_b, "Plan B"));
+        featuredLocations.add(new Most_viewedHelperClass(R.drawable.kfc, "KFC"));
+        featuredLocations.add(new Most_viewedHelperClass(R.drawable.tacos, "Chaneb Tacos"));
         adapter = new Most_viewedAdapter(featuredLocations);
         Most_viewedRecycler.setAdapter(adapter);
 
@@ -118,14 +119,14 @@ private GradientDrawable gradient1, gradient2, gradient3;
 
     private void CategoriesRecycler() {
         CategoriesRecycler.setHasFixedSize(true);
-        CategoriesRecycler.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+        CategoriesRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
         ArrayList<CategoriesHelperClass> categoriesLocations = new ArrayList<>();
-        categoriesLocations.add(new CategoriesHelperClass(R.drawable.after_wrk_img,"After Work"));
-        categoriesLocations.add(new CategoriesHelperClass(R.drawable.romantic,"Romantic"));
-        categoriesLocations.add(new CategoriesHelperClass(R.drawable.match_watch,"Live matches"));
-        categoriesLocations.add(new CategoriesHelperClass(R.drawable.discodance,"Dance fields"));
-        categoriesLocations.add(new CategoriesHelperClass(R.drawable.eat_img,"Something to eat"));
+        categoriesLocations.add(new CategoriesHelperClass(R.drawable.after_wrk_img, "After Work"));
+        categoriesLocations.add(new CategoriesHelperClass(R.drawable.romantic, "Romantic"));
+        categoriesLocations.add(new CategoriesHelperClass(R.drawable.match_watch, "Live matches"));
+        categoriesLocations.add(new CategoriesHelperClass(R.drawable.discodance, "Dance fields"));
+        categoriesLocations.add(new CategoriesHelperClass(R.drawable.eat_img, "Something to eat"));
         adapter = new CategoriesAdapter(categoriesLocations);
         CategoriesRecycler.setAdapter(adapter);
     }
@@ -137,9 +138,9 @@ private GradientDrawable gradient1, gradient2, gradient3;
         icon_drawer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(drawerLayout.isDrawerVisible(GravityCompat.START)){
+                if (drawerLayout.isDrawerVisible(GravityCompat.START)) {
                     drawerLayout.closeDrawer(GravityCompat.START);
-                }else
+                } else
                     drawerLayout.openDrawer(GravityCompat.START);
             }
         });
@@ -168,53 +169,53 @@ private GradientDrawable gradient1, gradient2, gradient3;
         });
     }
 
-    public void onBackPressed(){
-        if(drawerLayout.isDrawerVisible(GravityCompat.START)){
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerVisible(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
-        }else
+        } else
             super.onBackPressed();
     }
 
     private void FeaturedRecycler() {
         FeaturedRecycler.setHasFixedSize(true);
-        FeaturedRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false));
+        FeaturedRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
         ArrayList<FeaturedHelperClass> featuredLocations = new ArrayList<>();
-        featuredLocations.add(new FeaturedHelperClass(R.drawable.plan_b,"Plan B"));
-        featuredLocations.add(new FeaturedHelperClass(R.drawable.kfc,"KFC"));
-        featuredLocations.add(new FeaturedHelperClass(R.drawable.tacos,"Chaneb Tacos"));
+        featuredLocations.add(new FeaturedHelperClass(R.drawable.plan_b, "Plan B"));
+        featuredLocations.add(new FeaturedHelperClass(R.drawable.kfc, "KFC"));
+        featuredLocations.add(new FeaturedHelperClass(R.drawable.tacos, "Chaneb Tacos"));
         adapter = new FeaturedAdapter(featuredLocations);
         FeaturedRecycler.setAdapter(adapter);
 
-        gradient1 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,new int[]{0xffeff400, 0xffaff600});
-        gradient2 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,new int[]{0xffeff400, 0xffaff600});
-        gradient3 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,new int[]{0xffeff400, 0xffaff600});
+        gradient1 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, new int[]{0xffeff400, 0xffaff600});
+        gradient2 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, new int[]{0xffeff400, 0xffaff600});
+        gradient3 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, new int[]{0xffeff400, 0xffaff600});
 
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        switch (menuItem.getItemId()){
+        switch (menuItem.getItemId()) {
             case R.id.profile:
-                Intent i  = new Intent(Accueil.this,Profile.class);
+                Intent i = new Intent(Accueil.this, Profile.class);
                 startActivity(i);
                 break;
             case R.id.home:
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.search:
-                Intent x  = new Intent(Accueil.this, Affich_Events.class);
+                Intent x = new Intent(Accueil.this, Affich_Events.class);
                 startActivity(x);
                 break;
             case R.id.chat:
-                Intent y  = new Intent(Accueil.this, MessageActivity.class);
+                Intent y = new Intent(Accueil.this, MessageActivity.class);
                 startActivity(y);
                 break;
             case R.id.near_by:
                 Intent intent = null, chooser = null;
                 intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse("geo:36.845170,11.080392"));
-                chooser = Intent.createChooser(intent,"Launch Maps");
+                chooser = Intent.createChooser(intent, "Launch Maps");
                 startActivity(chooser);
                 break;
 

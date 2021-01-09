@@ -17,6 +17,7 @@ import java.util.ArrayList;
 public class Hotels extends AppCompatActivity {
     RecyclerView HotelsRecycler;
     RecyclerView.Adapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,15 +28,15 @@ public class Hotels extends AppCompatActivity {
 
     private void HotelsRecycler() {
         HotelsRecycler.setHasFixedSize(true);
-        HotelsRecycler.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+        HotelsRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
         ArrayList<HotelsHelperClass> RestaurantsLocations = new ArrayList<>();
-        RestaurantsLocations.add(new HotelsHelperClass(R.drawable.gldntulip,"Golde Tulip","Gammarth","This restaurants is specialized in sandwich "));
-        RestaurantsLocations.add(new HotelsHelperClass(R.drawable.mouradi,"El Mouradi","Gammarth","This restaurants is specialized in sandwich"));
-        RestaurantsLocations.add(new HotelsHelperClass(R.drawable.hilton,"Hilton","Gammarth","This restaurants is specialized in sandwich"));
-        RestaurantsLocations.add(new HotelsHelperClass(R.drawable.mercure,"Mercure","Centre Ville","This restaurants is specialized in sandwich and grilled food with hot sauces !!"));
-        RestaurantsLocations.add(new HotelsHelperClass(R.drawable.movenpik,"Movenpick","Sousse","This restaurants is specialized in sandwich and grilled food with hot sauces !!"));
-        RestaurantsLocations.add(new HotelsHelperClass(R.drawable.chezlm,"Chez l'Ami","Sokra","This restaurants is specialized in sandwich and grilled food with hot sauces !!"));
+        RestaurantsLocations.add(new HotelsHelperClass(R.drawable.gldntulip, "Golde Tulip", "Gammarth", "This restaurants is specialized in sandwich "));
+        RestaurantsLocations.add(new HotelsHelperClass(R.drawable.mouradi, "El Mouradi", "Gammarth", "This restaurants is specialized in sandwich"));
+        RestaurantsLocations.add(new HotelsHelperClass(R.drawable.hilton, "Hilton", "Gammarth", "This restaurants is specialized in sandwich"));
+        RestaurantsLocations.add(new HotelsHelperClass(R.drawable.mercure, "Mercure", "Centre Ville", "This restaurants is specialized in sandwich and grilled food with hot sauces !!"));
+        RestaurantsLocations.add(new HotelsHelperClass(R.drawable.movenpik, "Movenpick", "Sousse", "This restaurants is specialized in sandwich and grilled food with hot sauces !!"));
+        RestaurantsLocations.add(new HotelsHelperClass(R.drawable.chezlm, "Chez l'Ami", "Sokra", "This restaurants is specialized in sandwich and grilled food with hot sauces !!"));
         adapter = new HotelsAdapter(RestaurantsLocations);
         HotelsRecycler.setAdapter(adapter);
     }
