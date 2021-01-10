@@ -44,16 +44,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class Update_profile extends AppCompatActivity {
-    SharedPreferences sharedPreferencesV;
     SharedPreferences sharedPreferences;
-    EditText name1, lname1, email1, password1, phone1;
-    CompositeDisposable compositeDisposable = new CompositeDisposable();
-    INodeJS myAPI;
+    EditText name1, lname1, email1, phone1;
     Button update;
     private static int id = 1;
     public static INodeJS iNodeJS;
     int idd;
     LottieAnimationView v;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +61,6 @@ public class Update_profile extends AppCompatActivity {
         name1 = findViewById(R.id.nameee);
         lname1 = findViewById(R.id.lnameee);
         phone1 = findViewById(R.id.phoneee);
-        password1 = findViewById(R.id.passwordet);
         update = findViewById(R.id.btn_updt);
         iNodeJS = RetrofitClient.getInstance().create(INodeJS.class);
         loadClientData();
@@ -142,7 +139,7 @@ public class Update_profile extends AppCompatActivity {
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                // Toast.makeText(Update_profile.this, "Updated Successfully", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Update_profile.this, "Updated Successfully", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(Update_profile.this, Profile.class);
                 startActivity(i);
             }
@@ -184,7 +181,6 @@ public class Update_profile extends AppCompatActivity {
                 email1.setText(email);
                 name1.setText(name);
                 lname1.setText(lastname);
-                password1.setText(password);
                 phone1.setText(String.valueOf(phone));
 
             }

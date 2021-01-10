@@ -56,30 +56,6 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/linear2"
-        android:layout_marginTop="30dp"
-        android:orientation="horizontal"
-        android:layout_below="@id/linear1">
-
-        <ImageView
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            app:srcCompat="@drawable/messages"
-            android:layout_marginLeft="70dp"
-            tools:ignore="VectorDrawableCompat" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Messages"
-            android:textSize="18sp"
-            android:textColor="@color/black"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="6dp"/>
-
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -87,7 +63,7 @@
         android:id="@+id/linear3"
         android:layout_marginTop="30dp"
         android:orientation="horizontal"
-        android:layout_below="@id/linear5">
+        android:layout_below="@id/linear1">
 
         <ImageView
             android:layout_width="36dp"
@@ -106,31 +82,6 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/linear5"
-        android:layout_marginTop="30dp"
-        android:orientation="horizontal"
-        android:layout_below="@id/linear2">
-
-        <ImageView
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            app:srcCompat="@drawable/location"
-            android:layout_marginLeft="70dp"
-            tools:ignore="VectorDrawableCompat" />
-        <TextView
-            android:id="@+id/location"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Location"
-            android:textSize="18sp"
-            android:textColor="@color/black"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="6dp"/>
-
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

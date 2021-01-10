@@ -62,7 +62,6 @@ public class CommentaireAdapter extends RecyclerView.Adapter<CommentaireAdapter.
         sharedPreferencesU = parent.getContext().getSharedPreferences("CurrentUser", Context.MODE_PRIVATE);
         idus = sharedPreferencesU.getInt("idUser", 0);
 
-
         return vv;
     }
 
@@ -95,6 +94,8 @@ public class CommentaireAdapter extends RecyclerView.Adapter<CommentaireAdapter.
                     database = AppDataBase.getAppDatabase(v.getContext());
                     int position = getAdapterPosition();
                     if (position != RecyclerView.NO_POSITION) {
+                        sharedPreferences = v.getContext().getSharedPreferences("Evenement", Context.MODE_PRIVATE);
+                        sharedPreferencesUE = v.getContext().getSharedPreferences("UserEvent", Context.MODE_PRIVATE);
                         UserCommentaire ce = mData.get(position);
 
                     }

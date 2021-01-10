@@ -1,6 +1,7 @@
 package com.example.xbree.Retrofit;
 
 import com.example.xbree.Entities.Evenement;
+import com.example.xbree.Entities.Shop;
 import com.example.xbree.Entities.User;
 import com.example.xbree.Entities.UserCommentaire;
 
@@ -36,6 +37,14 @@ public interface INodeJS {
                                      @Field("id_user") int id_user,
                                      @Field("nom_user") String nom_user);
 
+    @POST("AddShop")
+    @FormUrlEncoded
+    Observable<String> shopUser (@Field("id_event") int id_event,
+                                      @Field("id_user") int id_user,
+                                      @Field("nom_event") String nom_event,
+                                      @Field("price") int price);
+
+
     @POST("login")
     @FormUrlEncoded
     Observable<String> loginUser (@Field("email") String email,
@@ -44,6 +53,10 @@ public interface INodeJS {
     @GET("/user/{email}")
 
     Call<User> getUser(@Path("email") String email);
+
+    @GET("/GetShop/{id_user}")
+
+    Call <List<Shop>> getUserShop(@Path("id_user") int id_user);
 
     @GET("/GetUE/{id_user}")
     Call<User> getUserE(@Path("id_user") int id);

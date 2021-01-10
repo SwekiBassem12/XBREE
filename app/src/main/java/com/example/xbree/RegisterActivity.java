@@ -175,8 +175,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 if (cp.equals(p)) {
 
                     registerUser(email.getText().toString(), name.getText().toString(), lname.getText().toString(), phone.getText().toString(), p);
-                    Intent i = new Intent(RegisterActivity.this, Accueil.class);
-                    startActivity(i);
+                    gotoMainActivity();
                 } else
                     Toast.makeText(RegisterActivity.this, "Confirm Your Password!", Toast.LENGTH_SHORT).show();
             }

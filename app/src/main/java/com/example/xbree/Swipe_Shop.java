@@ -38,7 +38,7 @@ public class Swipe_Shop extends AppCompatActivity implements com.example.xbree.R
 
         moviesList = new ArrayList<>();
 
-        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView = findViewById(R.id.recyclerViewS);
         recyclerAdapter = new com.example.xbree.RecyclerAdapter(moviesList, this);
 //        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(recyclerAdapter);
@@ -49,7 +49,6 @@ public class Swipe_Shop extends AppCompatActivity implements com.example.xbree.R
         moviesList.add("Ticket: Concert Solking");
         moviesList.add("Ticket: Kitch2.0");
         moviesList.add("Ticket: Rap Concert");
-        moviesList.add("Ticket: Art Gallery Sweki");
         moviesList.add("Ticket: Gallery Thamri");
 
 

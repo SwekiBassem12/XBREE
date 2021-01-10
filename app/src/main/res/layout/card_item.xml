@@ -44,7 +44,7 @@
             android:layout_marginTop="5dp"
             android:foregroundGravity="center_horizontal"
             android:scaleType="fitXY"
-            android:src="@color/card1"
+            android:src="@drawable/back_pic_eve"
             app:riv_corner_radius_bottom_left="5dp"
             app:riv_corner_radius_bottom_right="5dp"
             app:riv_corner_radius_top_left="5dp"
@@ -73,8 +73,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="110dp"
                 android:text="Defaultname"
-
-                android:textColor="#F8FDFCFC"
+                android:textColor="@color/black"
                 android:textSize="20dp"
                 android:layout_marginLeft="10dp" />
 

@@ -1,6 +1,5 @@
 package com.example.xbree.HomeAdapter;
 
-import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,12 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.xbree.R;
 import com.example.xbree.Utils.Restau_details;
-import com.example.xbree.Utils.Restaurants;
 
 import java.util.ArrayList;
 
 public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.RestaurantsViewHolder> {
-    private LayoutInflater layoutInflater;
 
     static ArrayList<RestaurantsHelperClass> RestaurantsLocations;
 
@@ -69,6 +66,7 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
                     //i.putExtra("image",image.)
                     i.putExtra("title", (title.getText().toString()));
                     i.putExtra("location", (location.getText().toString()));
+                    // i.putExtra("image",image.)
                     //i.putExtra("image",);
                     v.getContext().startActivity(i);
                 }

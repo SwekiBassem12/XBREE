@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,13 +20,17 @@ import com.example.xbree.Entities.User;
 import com.example.xbree.R;
 import com.example.xbree.Retrofit.INodeJS;
 import com.example.xbree.Retrofit.RetrofitClient;
+import com.example.xbree.Utils.Restau_details;
 import com.example.xbree.Utils.database.AppDataBase;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -44,7 +49,6 @@ public class EvenementAdapter extends RecyclerView.Adapter<EvenementAdapter.myVi
     TextView titleCamp, dateDebut, dateFin, price, location, username;
     private AppDataBase database;
     public static INodeJS iNodeJS;
-
 
     public EvenementAdapter(Context mContext, List<Evenement> mDataa) {
         this.mContext = mContext;
@@ -78,6 +82,23 @@ public class EvenementAdapter extends RecyclerView.Adapter<EvenementAdapter.myVi
         dateFin.setText(evenement.getDateFin());
         price.setText(evenement.getPrix() + " DT");
         location.setText(evenement.getLieu());
+
+        participer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                compositeDisposable.add(iNodeJS.shopUser(evenement.getId(),idus,evenement.getNom(),evenement.getPrix())
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Consumer<String>() {
+                            @Override
+                            public void accept(String s) throws Exception {
+                                //Toast.makeText(mContext, "" + s, Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                );
+            }
+        });
+
 
         Call<User> call = iNodeJS.getUserE(evenement.getId_user());
         System.out.println(call.toString() + "callllllllllll");

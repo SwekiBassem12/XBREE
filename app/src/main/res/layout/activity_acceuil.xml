@@ -49,10 +49,6 @@
             android:background="@color/banner_background"
             tools:ignore="VectorDrawableCompat" />
 
-
-
-
-
     </RelativeLayout>
     
     <ScrollView
@@ -100,7 +96,8 @@
                         app:srcCompat="@drawable/search"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:layout_marginRight="15dp"/>
+                        android:layout_marginRight="15dp"
+                        tools:ignore="VectorDrawableCompat" />
 
                 </RelativeLayout>
 
@@ -129,7 +126,8 @@
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_centerInParent="true"
-                            app:srcCompat="@drawable/restau"/>
+                            app:srcCompat="@drawable/restau"
+                            tools:ignore="VectorDrawableCompat" />
 
 
                     </RelativeLayout>

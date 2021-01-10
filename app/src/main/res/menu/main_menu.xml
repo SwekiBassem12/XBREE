@@ -1,42 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-<group android:checkableBehavior="single">
-    <item
-        android:id="@+id/home"
-        android:title="@string/acceuil"
-        android:icon="@drawable/home"/>
-    <item
-        android:id="@+id/search"
-        android:title="Events"
-        android:icon="@drawable/events"/>
-    <item
-        android:id="@+id/chat"
-        android:title="XBreers Chat Room"
-        android:icon="@drawable/categories"/>
-    <item
-        android:id="@+id/profile"
-        android:title="Profile"
-        android:icon="@drawable/person"/>
-    <item
-        android:id="@+id/near_by"
-        android:title="Near By !"
-        android:icon="@drawable/location"/>
-</group>
-    <!--
-    <item android:title="Profile">
-        <menu>
-            <group android:checkableBehavior="single">
-                <item
-                    android:id="@+id/update"
-                    android:title="Update Profile"
-                    android:icon="@drawable/home"/>
-                <item
-                    android:id="@+id/logout"
-                    android:title="Logout"
-                    android:icon="@drawable/search"/>
-            </group>
-        </menu>
-    </item>
--->
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/home"
+            android:icon="@drawable/home"
+            android:title="@string/acceuil" />
+        <item
+            android:id="@+id/search"
+            android:icon="@drawable/events"
+            android:title="Events" />
+        <item
+            android:id="@+id/chat"
+            android:icon="@drawable/categories"
+            android:title="XBreers Chat Room" />
+        <item
+            android:id="@+id/profile"
+            android:icon="@drawable/person"
+            android:title="Profile" />
+        <item
+            android:id="@+id/near_by"
+            android:icon="@drawable/location"
+            android:title="Near By !" />
+    </group>
+
 </menu>

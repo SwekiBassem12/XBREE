@@ -10,6 +10,8 @@ import android.util.Log;
 import android.util.Pair;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -45,6 +47,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private ImageButton btRegister;
     private TextView tvLogin;
     Button Go, facebook, ggl;
+    CheckBox check;
     private GoogleApiClient googleApiClient;
     private static final int RC_SIGN_IN = 1;
 
@@ -80,13 +83,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         ggl = findViewById(R.id.google);
         email = findViewById(R.id.emailEdit);
         password = findViewById(R.id.passwordEdit);
+        check = findViewById(R.id.tvremember);
 
         iNodeJS = RetrofitClient.getInstance().create(INodeJS.class);
 
         //sharedPreferences
         sharedPreferences = getSharedPreferences("testt", Context.MODE_PRIVATE);
-        email.setText(sharedPreferences.getString("test", ""));
-        password.setText(sharedPreferences.getString("test1", ""));
+        check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                email.setText(sharedPreferences.getString("test", ""));
+                password.setText(sharedPreferences.getString("test1", ""));
+            }
+        });
 
         facebook.setOnClickListener(new View.OnClickListener() {
             @Override

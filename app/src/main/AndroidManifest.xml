@@ -33,7 +33,11 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".LoginFacebook"></activity>
+        <activity android:name=".Utils.Cafe_details"></activity>
+        <activity android:name=".Utils.Hotels_details" />
+        <activity android:name=".Utils.Bars_details" />
+        <activity android:name=".ShopActivity" />
+        <activity android:name=".LoginFacebook" />
         <activity android:name=".ChatActivity" />
         <activity android:name=".MessageActivity" />
         <activity android:name=".Utils.Restau_details" />

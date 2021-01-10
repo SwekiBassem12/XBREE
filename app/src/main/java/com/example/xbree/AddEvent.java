@@ -89,9 +89,6 @@ public class AddEvent extends AppCompatActivity implements View.OnClickListener 
     Bitmap mBitmap;
     TextView textView;
     ImageView imageView;
-    private static final String[] cats = {"For Rental", "For Corental"};
-    //map
-    public static final String MY_PREFS_NAME2 = "CurrentUser";
 
 
     @Override
@@ -126,52 +123,91 @@ public class AddEvent extends AppCompatActivity implements View.OnClickListener 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //System.out.println("okkkk");
-                //String ss = String.valueOf(imageView);
-                //System.out.println(ss);
-                //System.out.println(idus);
-                LayoutInflater inflater = LayoutInflater.from(AddEvent.this);
-                View view = inflater.inflate(R.layout.calender_dialog, null);
-                final AlertDialog alertDialog = new AlertDialog.Builder(AddEvent.this)
-                        .setView(view)
-                        .create();
 
-                alertDialog.show();
+                if (nom.getText().toString().equals("")) {
+                    nom.setError("empty name");
 
-                Button acceptButton = view.findViewById(R.id.acceptButton);
-                Button cancelButton = view.findViewById(R.id.cancelButton);
+                } else if (type.getText().toString().equals("")) {
+                    type.setError("empty type");
 
-                acceptButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        addEvenement(nom.getText().toString(), type.getText().toString(), datedebut.getText().toString(), datefin.getText().toString(), Integer.parseInt(distance.getText().toString()),
-                                lieu.getText().toString(), Integer.parseInt(contact.getText().toString()), Integer.parseInt(prix.getText().toString()), camp_desc.getText().toString(), Integer.parseInt(nbPlace.getText().toString()), idus);
-                        Intent intent = new Intent(Intent.ACTION_INSERT);
-                        intent.setData(CalendarContract.Events.CONTENT_URI);
-                        intent.putExtra(CalendarContract.Events.TITLE, nom.getText().toString());
-                        intent.putExtra(CalendarContract.Events.EVENT_LOCATION, lieu.getText().toString());
-                        intent.putExtra(CalendarContract.Events.DESCRIPTION, camp_desc.getText().toString());
-                        intent.putExtra(CalendarContract.Events.ALL_DAY, true);
-                        intent.putExtra(Intent.EXTRA_EMAIL, "bassem.sweki@esprit.tn");
-                        if (intent.resolveActivity(getPackageManager()) != null) {
-                            startActivity(intent);
-                        } else {
-                            System.out.println("LLEEEEEE");
+
+                } else if (distance.getText().toString().equals("")) {
+                    distance.setError("empty distance");
+
+
+                } else if (lieu.getText().toString().equals("")) {
+                    lieu.setError("empty lieu");
+
+
+                } else if (prix.getText().toString().equals("")) {
+                    prix.setError("empty price");
+
+
+                } else if (contact.getText().toString().equals("") || contact.length()==8) {
+                    contact.setError("empty contact");
+
+
+                } else if (datedebut.getText().toString().equals("")) {
+                    datedebut.setError("empty date");
+
+
+                } else if (datefin.getText().toString().equals("")) {
+                    datefin.setError("empty date");
+
+
+                } else if (nbPlace.getText().toString().equals("")) {
+                    nbPlace.setError("empty number of places");
+
+
+                } else if (camp_desc.getText().toString().equals("")) {
+                    camp_desc.setError("empty description");
+
+
+                } else {
+
+                    LayoutInflater inflater = LayoutInflater.from(AddEvent.this);
+                    View view = inflater.inflate(R.layout.calender_dialog, null);
+                    final AlertDialog alertDialog = new AlertDialog.Builder(AddEvent.this)
+                            .setView(view)
+                            .create();
+
+                    alertDialog.show();
+
+                    Button acceptButton = view.findViewById(R.id.acceptButton);
+                    Button cancelButton = view.findViewById(R.id.cancelButton);
+
+                    acceptButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            addEvenement(nom.getText().toString(), type.getText().toString(), datedebut.getText().toString(), datefin.getText().toString(), Integer.parseInt(distance.getText().toString()),
+                                    lieu.getText().toString(), Integer.parseInt(contact.getText().toString()), Integer.parseInt(prix.getText().toString()), camp_desc.getText().toString(), Integer.parseInt(nbPlace.getText().toString()), idus);
+                            Intent intent = new Intent(Intent.ACTION_INSERT);
+                            intent.setData(CalendarContract.Events.CONTENT_URI);
+                            intent.putExtra(CalendarContract.Events.TITLE, nom.getText().toString());
+                            intent.putExtra(CalendarContract.Events.EVENT_LOCATION, lieu.getText().toString());
+                            intent.putExtra(CalendarContract.Events.DESCRIPTION, camp_desc.getText().toString());
+                            intent.putExtra(CalendarContract.Events.ALL_DAY, true);
+                            intent.putExtra(Intent.EXTRA_EMAIL, "bassem.sweki@esprit.tn");
+                            if (intent.resolveActivity(getPackageManager()) != null) {
+                                startActivity(intent);
+                            } else {
+                                System.out.println("LLEEEEEE");
+                            }
+
                         }
-
-                    }
-                });
-                cancelButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        addEvenement(nom.getText().toString(), type.getText().toString(), datedebut.getText().toString(), datefin.getText().toString(), Integer.parseInt(distance.getText().toString()),
-                                lieu.getText().toString(), Integer.parseInt(contact.getText().toString()), Integer.parseInt(prix.getText().toString()), camp_desc.getText().toString(), Integer.parseInt(nbPlace.getText().toString()), idus);
-                        Intent r = new Intent(AddEvent.this, Accueil.class);
-                        startActivity(r);
-                    }
-                });
-                //Intent i = new Intent(AddEvent.this, Accueil.class);
-                //startActivity(i);
+                    });
+                    cancelButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            addEvenement(nom.getText().toString(), type.getText().toString(), datedebut.getText().toString(), datefin.getText().toString(), Integer.parseInt(distance.getText().toString()),
+                                    lieu.getText().toString(), Integer.parseInt(contact.getText().toString()), Integer.parseInt(prix.getText().toString()), camp_desc.getText().toString(), Integer.parseInt(nbPlace.getText().toString()), idus);
+                            Intent r = new Intent(AddEvent.this, Accueil.class);
+                            startActivity(r);
+                        }
+                    });
+                    //Intent i = new Intent(AddEvent.this, Accueil.class);
+                    //startActivity(i);
+                }
             }
         });
         Calendar calendar = Calendar.getInstance();

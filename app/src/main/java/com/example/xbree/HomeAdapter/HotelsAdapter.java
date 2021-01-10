@@ -1,5 +1,6 @@
 package com.example.xbree.HomeAdapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.xbree.R;
+import com.example.xbree.Utils.Bars_details;
+import com.example.xbree.Utils.Hotels_details;
 
 import java.util.ArrayList;
 
@@ -54,7 +57,18 @@ public class HotelsAdapter extends RecyclerView.Adapter<HotelsAdapter.HotelsView
 
         public HotelsViewHolder(@NonNull View itemView) {
             super(itemView);
-
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(v.getContext(), Hotels_details.class);
+                    //i.putExtra("image",image.)
+                    i.putExtra("title", (title.getText().toString()));
+                    i.putExtra("location", (location.getText().toString()));
+                    // i.putExtra("image",image.)
+                    //i.putExtra("image",);
+                    v.getContext().startActivity(i);
+                }
+            });
             image = itemView.findViewById(R.id.Hotels_image);
             title = itemView.findViewById(R.id.Hotels_title);
             descrip = itemView.findViewById(R.id.Hotels_descrip);

@@ -116,7 +116,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:inputType="textEmailAddress" />
+                        android:inputType="textAutoComplete" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -180,10 +180,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/cv"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="40dp"
                 android:elevation="5dp"
                 android:text="Forgot your password?"
+                android:textSize="14sp" />
+
+            <CheckBox
+                android:id="@+id/tvremember"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/cv"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="40dp"
+                android:elevation="5dp"
+                android:text="Remember Me"
                 android:textSize="14sp" />
 
             <Button

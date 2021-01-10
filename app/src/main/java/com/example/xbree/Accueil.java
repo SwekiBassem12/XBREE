@@ -1,6 +1,8 @@
 package com.example.xbree;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,6 +11,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,11 +43,14 @@ public class Accueil extends AppCompatActivity implements NavigationView.OnNavig
     RecyclerView Most_viewedRecycler;
     RecyclerView.Adapter adapter;
     ImageView icon_drawer;
+    TextView showemail;
     ImageView shop;
     ImageView restau, hotel, bar, cafe;
     private GradientDrawable gradient1, gradient2, gradient3;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
+    SharedPreferences sharedPreferences;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +69,14 @@ public class Accueil extends AppCompatActivity implements NavigationView.OnNavig
         hotel = findViewById(R.id.hotel);
         bar = findViewById(R.id.bar);
         cafe = findViewById(R.id.cafe);
+        /*
+        showemail = findViewById(R.id.emailuser);
+        sharedPreferences = getApplicationContext().getSharedPreferences("CurrentUser", Context.MODE_PRIVATE);
+        String idus = sharedPreferences.getString("EmailUser", "");
+        String name = sharedPreferences.getString("EmailUser", "");
+        String lname = sharedPreferences.getString("EmailUser", "");
+        showemail.setText(idus);
+        */
         navigationDrawer();
         FeaturedRecycler();
         CategoriesRecycler();
